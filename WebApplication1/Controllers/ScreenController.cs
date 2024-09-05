@@ -126,5 +126,16 @@ namespace OnePixelBE.Controllers
 
             return Ok();
         }
+
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult UpdateOneFieldWithSignal(FieldViewModel fieldVM)
+        {
+
+            var response = _screenService.TryToUpdateOneFieldAsync(fieldVM);
+
+            return Ok();
+        }
     }
 }

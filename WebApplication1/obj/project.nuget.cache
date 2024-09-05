@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nVQZ2Bznmbi7ebedhYBEQvDnWRdJNv3auhRZS7nGFgs36v2DWWY+mAItpoImguQ9lOwDANVmmktx3DMo6evlBw==",
+  "dgSpecHash": "/OkAfk4RYLzOp+rgY+elZ41sx6Y3Voz+vE91SyWngJ9Mwwota6wPeEY+n51i+cZ/flWmNLj0mjM7kTUCndyzjw==",
   "success": true,
-  "projectFilePath": "E:\\ProjektyVS\\OnePixel\\OnePixel\\BE\\OnePixelBE\\WebApplication1\\OnePixelBE.csproj",
+  "projectFilePath": "E:\\ProjektyVS\\OnePixel\\OnePixel\\BE2\\OnePixelBE\\WebApplication1\\OnePixelBE.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

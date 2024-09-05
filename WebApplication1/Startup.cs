@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using OnePixelBE.EF;
 using OnePixelBE.Services;
 using System.Text.Json.Serialization;
+using OnePixelBE.HubConfig;
 
 namespace OnePixelBE
 {
@@ -44,6 +45,13 @@ namespace OnePixelBE
                 });
             }
             );
+
+
+
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+            });
 
             services.AddControllers()
                .AddJsonOptions(options =>
@@ -107,10 +115,10 @@ namespace OnePixelBE
             app.UseAuthentication();
 
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalHub>("/toastr");
             });
         }
     }

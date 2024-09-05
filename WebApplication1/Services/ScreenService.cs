@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
 using OnePixelBE.EF;
+using OnePixelBE.HubConfig;
 using OnePixelBE.Models;
 using OnePixelBE.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnePixelBE.Services
 {
@@ -14,10 +17,12 @@ namespace OnePixelBE.Services
 
         readonly AppDbContext _context;
         private IMapper _mapper;
-        public ScreenService(IMapper mapper, AppDbContext context)
+        private readonly IHubContext<SignalHub> _ctx;
+        public ScreenService(IMapper mapper, AppDbContext context, IHubContext<SignalHub> ctx)
         {
             _mapper = mapper;
             _context = context;
+            _ctx = ctx;
         }
 
         internal CustomResponse TryToGetColors()
@@ -79,6 +84,20 @@ namespace OnePixelBE.Services
             fieldModel.Color = fieldVM.Color;
             _context.SaveChanges();
 
+            return new CustomResponse() { Status = true, Message = "Update success" };
+        }
+
+        internal async Task<CustomResponse> TryToUpdateOneFieldAsync(FieldViewModel fieldVM)
+        {
+            if (!listOfColors.Contains(fieldVM.Color))
+            {
+                return new CustomResponse() { Status = false, Message = "There is no such color" };
+            }
+            FieldModel fieldModel = _context.FieldModels.FirstOrDefault(x => x.Id == fieldVM.Id);
+            fieldModel.Color = fieldVM.Color;
+            _context.SaveChanges();
+
+            await _ctx.Clients.All.SendAsync("Send", fieldVM);
             return new CustomResponse() { Status = true, Message = "Update success" };
         }
     }
